@@ -43,14 +43,16 @@ yarn start
 
 ```
 
-> packages used
+#packages used
 
 <!-- prettier ignore -->
 
-<!-- reactJs
+```
+reactJs
 tailwinds CSS
 firebase functions
 express
 react route dom
 framer motion
-react icons -->
+react icons
+```
