@@ -122,3 +122,10 @@ yarn add react-router-dom react-icons framer-motion
 
 rfce to create container
 rafce to creacte constant component
+
+yarn add firebase
+
+add on the server/functions
+npm install express dotenv cors
+
+add axios to client
