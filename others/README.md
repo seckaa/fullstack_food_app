@@ -129,3 +129,9 @@ add on the server/functions
 npm install express dotenv cors
 
 add axios to client
+
+add yarn add redux react-redux to client
+
+https://github.com/reduxjs/redux-devtools/tree/main/extension#installation
+
+https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd/related
