@@ -17,6 +17,7 @@ import {app} from '../config/firebase.config';
 import { validateUserJWTToken } from '../api';
 import { setUserDetails } from '../context/actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
+import { alertDanger, alertInfo, alertWarning } from '../context/actions/alertAction';
 
 const Login =()=> {
 
@@ -32,6 +33,9 @@ const Login =()=> {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
+  const alert = useSelector((state) => state.alert);
+
+
 
   useEffect(() => {
     if(user){
@@ -64,7 +68,7 @@ const Login =()=> {
     if(userEmail === ""|| password === "" || confirm_password === "") {
       // console.log('they are empty');
       //alert msg
-
+      dispatch(alertInfo("Required field Should not be empty"));
     }else{
       if(password === confirm_password ){
         setuserEmail("");
@@ -92,6 +96,7 @@ const Login =()=> {
         console.log("equal");
       }else{
          //alert msg
+         dispatch(alertWarning("Password doesn't match"));
       }
     }
   };
@@ -114,6 +119,7 @@ const Login =()=> {
        });
     }else{
       //alert message 
+      dispatch(alertDanger("Password doesn't match"));
     }
 
   };

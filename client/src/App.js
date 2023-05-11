@@ -4,15 +4,16 @@ import { Login, Main } from './containers';
 import { getAuth } from 'firebase/auth';
 import { app } from './config/firebase.config';
 import { validateUserJWTToken } from './api';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setUserDetails} from './context/actions/userActions'
 import { motion } from 'framer-motion';
 import { fadeInOut } from './animations';
-import { MainLoader } from './components';
+import { Alert, MainLoader } from './components';
 
 const App = () => {
   const firebaseAuth = getAuth(app);
   const [isLoading, setisLoading] = useState(false);
+  const alert = useSelector((state) => state.alert);
 
   const dispatch = useDispatch();
 
@@ -45,6 +46,8 @@ const App = () => {
             <Route path="/*" element={<Main />}/>
             <Route path="/login" element={<Login />}/>
         </Routes>
+
+        {alert?.type && <Alert type={alert?.type} message={alert?.message}/>}
     </div>
   );
 };
