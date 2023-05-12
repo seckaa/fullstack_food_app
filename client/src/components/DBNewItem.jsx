@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import {statuses} from '../utils/styles'
 import {Spinner} from '../components';
-import { FaCloudUploadAlt } from '../assets/icons';
-import {getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import { FaCloudUploadAlt, MdDelete } from '../assets/icons';
+import {deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../config/firebase.config';
 import { useDispatch, useSelector } from 'react-redux';
 import { alertDanger, alertNull, alertSuccess } from '../context/actions/alertAction';
+import { buttonClick } from '../animations';
+import { motion } from 'framer-motion';
+import { addnewProduct } from '../api';
 
 
 const DBNewItem = () => {
@@ -51,9 +54,46 @@ const DBNewItem = () => {
           setTimeout(() => {
             dispatch(alertNull());
           }, 3000);
-          // setimageDownloadURL(null);
         });
       });
+  };
+
+  const deleteImageFromFirebase = () => {
+    // console.log("Image deleted")
+    setIsLoading(true);
+    const deleteRef = ref(storage, imageDownloadURL);
+
+    deleteObject(deleteRef).then(() => {
+      setimageDownloadURL(null);
+      setIsLoading(false);
+
+      dispatch(alertSuccess("Image deleted from the cloud"));
+          setTimeout(() => {
+            dispatch(alertNull());
+          }, 3000);
+    });
+  };
+
+  const submitNewData = () =>{
+    const data = {
+      product_name: itemName,
+      product_category: category,
+      product_price: price,
+      imageURL: imageDownloadURL,
+    };
+    // console.log(data);
+    addnewProduct(data).then(res =>{
+      console.log(data);
+
+      dispatch(alertSuccess("New Item added"));
+      setTimeout(() => {
+        dispatch(alertNull());
+      }, 3000);
+      setimageDownloadURL(null);
+      setItemName("");
+      setPrice("");
+      setCategory(null);
+    });
   };
 
   return (
@@ -90,7 +130,29 @@ const DBNewItem = () => {
         rounded-md border-2 border-dotted border-gray-300 cursor-pointer'>
           {isLoading ? <div className='w-full h-full flex flex-col items-center justify-evenly px-24'>
             <Spinner/> 
-            {progress}
+            {Math.round(progress >0) && (
+              <div className='w-full flex flex-col items-center justify-center gap-2'>
+                <div className='w-full flex justify-between'>
+                  <span className='text-base font-medium text-textColor'>
+                    Progress
+                  </span>
+                  <span className='text-sm font-medium text-textColor'>
+                   {Math.round(progress) > 0 && (
+                    <>{`${Math.round(progress)}%`}</>
+                    )}
+                  </span>
+                </div>  
+
+                <div className='w-full rounded-full bg-gray-200 h-2.5'>
+                  <div
+                   className='bg-red-600 rounded-full h-2.5 transition-all duration-300 ease-in-out'
+                   style={{
+                     width: `${Math.round(progress)}%`,
+                   }}
+                  ></div>
+                </div>              
+              </div>
+            )}
           </div> : <>
           {!imageDownloadURL ? <>
               <label>
@@ -113,9 +175,35 @@ const DBNewItem = () => {
                 />
               </label>
             </>
-               : <></>}
+               : <>
+                    <div className="relative w-full h-full overflow-hidden rounded-md">
+                      <motion.img
+                      //  {...imageWhileHover}
+                      whileHover={{scale: 1.15}}
+                       src={imageDownloadURL}
+                       className="w-full h-full object-cover"
+                      />
+                      <motion.button 
+                       {...buttonClick}
+                       type="button"
+                       className="absolute top-3 right-3 p-3 rounded-full bg-red-500 text-xl cursor-pointer outline-none hover:shadow-md duration-500 transition-all ease-in-out"
+                       onClick={() => deleteImageFromFirebase
+                        (imageDownloadURL)}
+                      >
+                       <MdDelete className='-rotate-0'/>
+                      </motion.button>
+                    </div>
+                 </>}
           </>}
         </div>
+
+        <motion.button 
+         onClick={submitNewData}
+         {...buttonClick}
+         className='w-9/12 py-2 rounded-md bg-red-400 text-primary hover:bg-red-500 cursor-pointer'
+         >
+          Save
+        </motion.button>
       </div>     
     </div>
   );
