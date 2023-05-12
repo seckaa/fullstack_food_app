@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {Route, Routes} from "react-router-dom";
-import { Login, Main } from './containers';
+import { Dashboard, Login, Main } from './containers';
 import { getAuth } from 'firebase/auth';
 import { app } from './config/firebase.config';
 import { validateUserJWTToken } from './api';
@@ -37,14 +37,18 @@ const App = () => {
 
   return (
     <div className="w-screen min-h-screen h-auto flex flex-col items-center justify-center">
-        {isLoading && (<motion.div {...fadeInOut} 
-        className='fixed z-50 inset-0 bg-lightOverlay backdrop-blur-md flex items-center justify-center w-full'
+        {isLoading && (
+        <motion.div 
+          {...fadeInOut} 
+          className='fixed z-50 inset-0 bg-lightOverlay backdrop-blur-md flex items-center justify-center w-full'
         >
           <MainLoader />
-        </motion.div>)}
+        </motion.div>
+        )}
         <Routes>
             <Route path="/*" element={<Main />}/>
             <Route path="/login" element={<Login />}/>
+            <Route path="/dashboard/*" element={<Dashboard />}/>
         </Routes>
 
         {alert?.type && <Alert type={alert?.type} message={alert?.message}/>}

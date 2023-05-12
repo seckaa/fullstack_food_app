@@ -135,3 +135,23 @@ add yarn add redux react-redux to client
 https://github.com/reduxjs/redux-devtools/tree/main/extension#installation
 
 https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd/related
+
+add to client
+yarn add -D tailwind-scrollbar
+https://www.npmjs.com/package/tailwind-scrollbar
+add to tailwin config
+require('tailwind-scrollbar'),
+
+https://material-table.com/#/
+yarn add material-table @material-ui/core
+yarn add @material-ui/icons
+yarn add @emotion/react @emotion/styled @material-ui/core @material-ui/icons @mui/icons-material @mui/lab @mui/material @mui/styles
+
+after struggled
+
+yarn add @mui/material @emotion/react @emotion/styled
+yarn add @mui/icons-material
+yarn add @mui/lab
+
+yarn add @material-ui/icons
+yarn add @mui/icons-material
