@@ -155,3 +155,6 @@ yarn add @mui/lab
 
 yarn add @material-ui/icons
 yarn add @mui/icons-material
+add also index cssa swell
+
+https://flowbite.com/docs/components/spinner/
