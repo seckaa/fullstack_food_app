@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { alertDanger, alertNull, alertSuccess } from '../context/actions/alertAction';
 import { buttonClick } from '../animations';
 import { motion } from 'framer-motion';
-import { addnewProduct } from '../api';
+import { addnewProduct,getAllProducts } from '../api';
+import {setAllProducts} from '../context/actions/productActions'
 
 
 const DBNewItem = () => {
@@ -34,7 +35,7 @@ const DBNewItem = () => {
     uploadTask.on(
       'state_changed', 
       (snapshot) => {
-        setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100 );
       }, 
       (error) => {
         console.log(error);
@@ -82,9 +83,9 @@ const DBNewItem = () => {
       imageURL: imageDownloadURL,
     };
     // console.log(data);
+    //add data
     addnewProduct(data).then(res =>{
-      console.log(data);
-
+      console.log(res);
       dispatch(alertSuccess("New Item added"));
       setTimeout(() => {
         dispatch(alertNull());
@@ -92,8 +93,13 @@ const DBNewItem = () => {
       setimageDownloadURL(null);
       setItemName("");
       setPrice("");
-      setCategory(null);
+      setCategory(null); 
     });
+    // get all products
+    getAllProducts().then((data) => {
+      dispatch(setAllProducts(data));
+    });
+
   };
 
   return (
