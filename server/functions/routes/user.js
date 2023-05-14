@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const admin = require('firebase-admin');
+let data = [];
 
 //default route for api users
 router.get("/", (req, res) =>{
@@ -32,4 +33,41 @@ router.get("/jwtVerification", async(req, res) => {
     }
 });
 
+const listAllUsers = async (nextPageToken) => {
+    // List batch of users, 1000 at a time.
+    admin
+      .auth()
+      .listUsers(1000, nextPageToken)
+      .then((listUsersResult) => {
+        listUsersResult.users.forEach((rec) => {
+          data.push(rec.toJSON());
+        });
+        if (listUsersResult.pageToken) {
+          // List next batch of users.
+          listAllUsers(listUsersResult.pageToken);
+        }
+      })
+      .catch((error) => {
+        console.log('Error listing users:', error);
+      });
+  };
+  // Start listing users from the beginning, 1000 at a time.
+  listAllUsers();
+
+  router.get("/all", async(req, res) => {
+    listAllUsers();
+    try {
+        return res
+         .status(200)
+         .send({success: true, data: data, dataCount: data.length});
+    } catch (err) {
+        return res.send({
+            success: false,
+            msg: `Error is listing users :, ${err}`,
+        });
+    }
+  });
+
 module.exports = router;
+
+//43

@@ -47,3 +47,13 @@ export const deleteAProduct = async (productId) => {
         return null;
     }    
 };
+
+//get all users
+export const getAllUsers = async () => {
+    try {
+        const res = await axios.get(`${baseURL}/api/users/all`);
+        return res.data.data;
+    } catch (error) {
+        return null
+    }
+}

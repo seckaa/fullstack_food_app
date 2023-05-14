@@ -17,3 +17,5 @@ export {default as DataTable} from "./DataTable";
 
 export {default as Spinner} from "./Spinner";
 
+export {default as Home} from "./Home";
+
