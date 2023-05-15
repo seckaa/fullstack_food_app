@@ -164,3 +164,5 @@ https://mui.com/material-ui/react-progress/
 https://coreui.io/react/docs/components/chart/
 
 yarn add @coreui/react-chartjs to client
+
+https://swiperjs.com/get-started
