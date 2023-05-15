@@ -12,13 +12,15 @@ const SliderCard = ({data, index}) => {
   const dispatch = useDispatch();
 
   const sendToCart = () =>{
-    addNewItemToCart(user?.user_id, data).then(res => {
-      dispatch(alertSuccess("Added to cart"));
+    dispatch(alertSuccess("Added to cart"));
+    addNewItemToCart(user?.user_id, data).then((res) => {
+      
       getAllCartItems(user?.user_id).then((items) => {
         console.log(items);
-      })
+      });
+      
       setInterval(() => {
-        dispatch(alertNull);
+        dispatch(alertNull());
       }, 3000);
     });
   };

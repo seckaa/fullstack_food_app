@@ -82,7 +82,7 @@ router.post("/addToCart/:userId", async (req, res) => {
             return res.status(200).send({success: true, data: updateItem});
          }else{
             const data = {
-                productId:id,
+                productId:productId,
                 product_name: req.body.product_name,
                 product_category: req.body.product_category,
                 product_price: req.body.product_price,

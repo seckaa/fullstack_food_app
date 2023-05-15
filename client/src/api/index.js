@@ -72,7 +72,7 @@ export const addNewItemToCart = async (user_id, data) => {
 };
 
 //get all Items
-export const getAllCartItems = async (user_id) => {
+export const getAllCartItems = async(user_id) => {
     try {
         const res = await axios.get(
             `${baseURL}/api/products/getCartItems/${user_id}`
