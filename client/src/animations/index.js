@@ -13,6 +13,13 @@ export const slidTop ={
     exit:{opacity: 0, y:30},
 };
 
+export const slidIn ={
+    initial:{opacity: 0, x:30},
+    animate:{opacity: 1, x:0},
+    exit:{opacity: 0, x:30},
+};
+
+
 export const staggerFadeInOut = (i) => {
     return {
         initial: {opacity: 0, y:50},

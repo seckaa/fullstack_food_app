@@ -6,6 +6,7 @@ import { addNewItemToCart, getAllCartItems } from '../api';
 // import {HiCurrencyRupee} from '../assets/icons'
 import {useDispatch, useSelector} from 'react-redux';
 import { alertNull, alertSuccess } from '../context/actions/alertAction'
+import { setCartItems } from '../context/actions/cartActions';
 
 const SliderCard = ({data, index}) => {
   const user = useSelector((state) => state.user);
@@ -16,7 +17,8 @@ const SliderCard = ({data, index}) => {
     addNewItemToCart(user?.user_id, data).then((res) => {
       
       getAllCartItems(user?.user_id).then((items) => {
-        console.log(items);
+        // console.log(items);
+        dispatch(setCartItems(items));
       });
       
       setInterval(() => {

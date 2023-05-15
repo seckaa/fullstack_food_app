@@ -7,12 +7,12 @@ const DataTable = ({columns, data, title, actions}) => {
   return (
     <div className='flex items-center justify-center gap-4 pt-6 w-full'>
         <ThemeProvider theme={defaultMaterialTheme}>
-        <MaterialTable
-        columns={columns}
-        data={data}
-        title={title}
-        actions={actions}/>
-      </ThemeProvider>
+          <MaterialTable
+          columns={columns}
+          data={data}
+          title={title}
+          actions={actions}/>
+        </ThemeProvider>
 
     </div>
   );
