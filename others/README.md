@@ -166,3 +166,16 @@ https://coreui.io/react/docs/components/chart/
 yarn add @coreui/react-chartjs to client
 
 https://swiperjs.com/get-started
+
+payment modul
+https://stripe.com/docs/payments/accept-a-payment
+https://dashboard.stripe.com/test/apikeys
+
+add to server npm install stripe --save
+open cmds prompt
+
+install strip cli
+stripe login
+C:\Users\secka>stripe listen --forward-to http://127.0.0.1:5001/fullstack-food-app-e054e/us-central1/app/api/products/webhook
+
+stripe trigger payment_intent.succeeded

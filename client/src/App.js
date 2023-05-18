@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setUserDetails} from './context/actions/userActions'
 import { motion } from 'framer-motion';
 import { fadeInOut } from './animations';
-import { Alert, MainLoader } from './components';
+import { Alert, MainLoader, CheckOutSuccess} from './components';
 import { setCartItems } from './context/actions/cartActions';
 
 const App = () => {
@@ -54,6 +54,7 @@ const App = () => {
             <Route path="/*" element={<Main />}/>
             <Route path="/login" element={<Login />}/>
             <Route path="/dashboard/*" element={<Dashboard />}/>
+            <Route path="/checkout-success" element={<CheckOutSuccess />}/>
         </Routes>
 
         {alert?.type && <Alert type={alert?.type} message={alert?.message}/>}
@@ -62,3 +63,4 @@ const App = () => {
 };
 
 export default App;
+
