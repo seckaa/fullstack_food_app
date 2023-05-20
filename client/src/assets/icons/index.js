@@ -14,7 +14,7 @@ import {
   } from "react-icons/bs";
   import { IoFastFood, IoBasket } from "react-icons/io5";
   import { BiChevronsRight } from "react-icons/bi";
-  import { HiCurrencyRupee} from "react-icons/hi2";
+  import { HiCurrencyRupee, HiCurrencyDollar} from "react-icons/hi2";
   
   export {
     FaEnvelope,
@@ -35,5 +35,6 @@ import {
     FcClearFilters,
     FaArrowLeft,
     HiCurrencyRupee,
+    HiCurrencyDollar
   };
   
